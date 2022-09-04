@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import './App.css';
 import axios from 'axios';
 
+interface FormProps {
+  onSubmit: () => any;
+  children?: JSX.Element;
+}
 
 function App() {
   const [checkApiPkemon, setCheckApiPkemon] = useState(false)
@@ -15,11 +19,11 @@ function App() {
     height: "",
     weight: "",
   })
-  const search = () => {
+  const search = (): any => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${apiPokemon}`).then((Response) => {
       SetPokemon({
         id: Response.data.id,
-        name: apiPokemon,
+        name: Response.data.name,
         img: Response.data.sprites.front_default,
         type: Response.data.types[0].type.name,
         height: Response.data.height,
@@ -27,24 +31,59 @@ function App() {
       })
       setCheckApiPkemon(true)
     })
-
+    return true
   }
+  const formElement = (): JSX.Element => {
+    return (
+      <label>
+        <input
+          type="text"
+          value={apiPokemon}
+          onChange={(e) => { setApiPokemon(e.target.value); setCheckApiPkemon(false); }}
+          onKeyUp={() => search()}
+          name="search" />
+        {/* <input className='_button' onClick={(e) => {
+          search()
+        }} type="submit" value="Search" /> */}
+      </label>)
+  }
+  const Form = ({ onSubmit, children }: FormProps) =>
+    <form
+      onKeyDown={
+        (e) => {
+          /**
+           * Note: Pressing enter in some input in a browser forms
+           *  triggers onClick on the first child button
+           *
+           * So, prevent `enter` from triggering `onClick` on any buttons
+           *  and instead trigger onSubmit
+           */
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            onSubmit();
+          }
+        }
+      }
+      onSubmit={
+        (e) => {
+          /**
+           * Prevent submit from reloading the page
+           */
+          e.preventDefault();
+          e.stopPropagation();
+          onSubmit();
+        }
+      }>
+      {children}
+    </form>
   return (
     <div className='App'>
       <header className="App-header">
         <h1>Pokédex</h1>
-        <form>
-          <label>
-            <input
-              type="text"
-              value={apiPokemon}
-              onChange={(e) => { setApiPokemon(e.target.value); setCheckApiPkemon(false) }}
-              name="search" />
-          </label>
-          <input className='_button' onClick={(e) => {
-            search()
-          }} type="button" value="Search" />
-        </form>
+        <h3>Input Pokémon ID or Pokémon's Name</h3>
+        {
+          Form({ onSubmit: search(), children: formElement() })
+        }
         <div className='test'>
           {
             checkApiPkemon && getPokemon(Pokemon)
@@ -69,5 +108,4 @@ function getPokemon(Pokemon: any) {
     </div >
   )
 }
-
 

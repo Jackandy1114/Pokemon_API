@@ -1,93 +1,74 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  /* background-color: #282c34; */
-  background-color: #61dafb;
-  min-height: 100vh;
+  color: coral;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #063ca6;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ANCHOR ----------------------------------------- */
-
-._button {
-  padding: 10px;
-  margin-left: 10px;
-  border-radius: 10px;
-  background-color: #282c34;
-  color: #eee;
-  border-color: #eee;
-}
-
-._button:hover {
-  background-color: #eee;
-  color: #282c34;
-}
-
-input {
-  padding: 10px 0px;
-  text-align: center;
   align-items: center;
-  border-radius: 10px;
-  font-size: calc(10px + 2vmin);
-  background-color: #282c34;
-  color: #eee;
 }
 
 .test {
-  height: 70vh;
-}
-
-.test>.test_app {
-  width: 300px;
-  /* height: 80vh; */
   display: flex;
   flex-direction: column;
-}
-
-.test img {
+  align-items: center;
   justify-content: center;
+  /* background-color: aqua; */
 }
 
-.test span {
+.test_app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1,
+h3 {
+  margin: 20px;
+}
+
+.App-header {
+  margin-top: 100px;
+  width: 400px;
+}
+
+form>label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.test_app>img {
+  height: 250px;
+  width: 250px;
+}
+
+input {
+  padding: 10px 10px;
+  border-radius: 10px;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+
+
+}
+
+input:hover {
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(255, 127, 80, 0.25), 0 10px 10px rgba(255, 127, 80, 0.22);
+}
+
+p {
+  margin: 5px;
+  width: 70%;
+  /* background-color: antiquewhite; */
+}
+
+
+span {
   float: left;
 }
 
-.test b {
+b {
   float: right;
-}
-
-h1 {
-  word-wrap: break-word;
 }

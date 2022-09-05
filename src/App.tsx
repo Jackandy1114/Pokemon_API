@@ -29,27 +29,31 @@ function App() {
         height: Response.data.height,
         weight: Response.data.weight,
       })
-      setCheckApiPkemon(true)
+      !checkApiPkemon ? setCheckApiPkemon(true) : nothing()
     })
-    return true
+
   }
+  const nothing = (): any => { }
   const formElement = (): JSX.Element => {
     return (
       <label>
         <input
           type="text"
           value={apiPokemon}
-          onChange={(e) => { setApiPokemon(e.target.value); setCheckApiPkemon(false); }}
-          onKeyUp={() => search()}
+          onChange={(e) => {
+            setApiPokemon(e.currentTarget.value);
+            //  setCheckApiPkemon(false) 
+          }}
+          // onKeyUp={() => search()}
           name="search" />
-        {/* <input className='_button' onClick={(e) => {
+        <input className='_button' onClick={(e) => {
           search()
-        }} type="submit" value="Search" /> */}
+        }} type="submit" value="Search" />
       </label>)
   }
   const Form = ({ onSubmit, children }: FormProps) =>
     <form
-      onKeyDown={
+      onKeyUp={
         (e) => {
           /**
            * Note: Pressing enter in some input in a browser forms
@@ -82,11 +86,13 @@ function App() {
         <h1>Pokédex</h1>
         <h3>Input Pokémon ID or Pokémon's Name</h3>
         {
-          Form({ onSubmit: search(), children: formElement() })
+          Form({ onSubmit: nothing(), children: formElement() })
         }
         <div className='test'>
           {
-            checkApiPkemon && getPokemon(Pokemon)
+            checkApiPkemon &&
+            getPokemon(Pokemon)
+
           }
         </div>
       </header>

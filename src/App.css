@@ -1,7 +1,7 @@
 .App {
   color: coral;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background-color: aqua; */
+  height: 80%;
 }
 
 .test_app {
@@ -27,14 +27,14 @@ h3 {
 }
 
 .App-header {
-  margin-top: 100px;
-  width: 400px;
+  width: 80%;
+  height: 80%;
 }
 
 form>label {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 
